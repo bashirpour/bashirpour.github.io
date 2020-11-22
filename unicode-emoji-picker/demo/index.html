@@ -25,24 +25,47 @@
 
         .btn {
             display: inline-block;
-            margin-bottom: 0;
             font-weight: 400;
+            line-height: 1.25;
             text-align: center;
             white-space: nowrap;
             vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            background-image: none;
-            border: 1px solid transparent;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            border-radius: 4px;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            border: 1px solid transparent;
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            -webkit-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+        }
+
+        .btn-secondary {
+            color: #292b2c;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+
+        .btn-secondary:hover {
+            color: #292b2c;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        a.btn {
+            min-width: 160px;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            margin-top: -200px;
+        }
+
+        .btn-info {
             color: #fff;
             background-color: #31b0d5;
         }
@@ -73,7 +96,7 @@
             position: relative;
         }
 
-        span {
+        span.menu_loc {
             margin-bottom: 20px;
             display: inline-block;
             color: #3f3f3f;
@@ -98,18 +121,22 @@
 
 
 <div class="container">
+    <a href="https://github.com/bashirpour/unicode-emoji-picker" class="btn btn-secondary">
+        <span>View on GitHub</span>
+        <img src="../../assets/GitHub-Mark/GitHub-Mark-32px.png" alt="">
+    </a>
     <div class="result"></div>
     <div>
         <p>Trigger (open/close) with selector: </p>
-        <button id="triggerButton" class="btn emoji-picker">Trigger Emoji Menu</button>
+        <button id="triggerButton" class="btn btn-info emoji-picker">Trigger Emoji Menu</button>
     </div>
     <div>
         <p>Trigger (open/close) with onClick event:</p>
-        <button onclick="$.triggerEmojiMenu()" class="btn emoji-picker">Trigger Emoji Menu</button>
+        <button onclick="$.triggerEmojiMenu()" class="btn btn-info emoji-picker">Trigger Emoji Menu</button>
     </div>
 
     <div class="emoji-menu-place">
-        <span>Emoji Menu location</span>
+        <span class="menu_loc">Emoji Menu location</span>
         <div id="emojiMenuPlace"></div>
     </div>
 </div>

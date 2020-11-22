@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple MDE with Unicode Emoji</title>
+
+    <link rel="stylesheet" href="simplemde-markdown-editor-master/simplemde.min.css">
+    <script src="simplemde-markdown-editor-master/simplemde.min.js"></script>
+
+    <link href="unicode-emoji-picker/css/emoji.css" rel="stylesheet">
+
+    <style>
+        .editor-toolbar:hover {
+            opacity: unset !important;
+        }
+
+        .editor-toolbar {
+            opacity: 1;
+        }
+
+        .emoji-menu {
+            top: 100%;
+        }
+
+
+        /*Other style*/
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            -webkit-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+        }
+
+        .btn-secondary {
+            color: #292b2c;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+
+        .btn-secondary:hover {
+            color: #292b2c;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        a.btn {
+            min-width: 160px;
+            max-width: 200px;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .emoji-menu {
+                left: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div style="display: flex;justify-content: center">
+    <a href="https://github.com/bashirpour/unicode-emoji-picker" class="btn btn-secondary">
+        <span>View on GitHub</span>
+        <img src="../assets/GitHub-Mark/GitHub-Mark-32px.png" alt="">
+    </a>
+</div>
+
+
+<textarea id="simplemde"></textarea>
+
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script src="unicode-emoji-picker/js/config.js"></script>
+<script src="unicode-emoji-picker/js/emoji-picker.js"></script>
+
+<script>
+    var simplemde = new SimpleMDE({
+        spellChecker: false,
+        toolbar: ["bold", "italic", "heading", "|", "code", "quote", "link", "|", "unordered-list", "ordered-list", "table", "|", "preview", "side-by-side", "fullscreen", '|',
+            {
+                name: "emojiable",
+                action: function customFunction(editor) {
+                    $.triggerEmojiMenu()
+                },
+                className: "fa fa-smile-o",
+                title: "Emoji",
+            }]
+    });
+
+
+    $(function () {
+        window.emojiPicker = new EmojiPicker({
+            assetsPath: 'unicode-emoji-picker/img/',
+            triggerButton: $("#openEmoji"),
+            emojiMenuPlace: $(".editor-toolbar"),
+            dontHideOnClick: 'fa-smile-o',
+            emojiResult: function (res) {
+                var pos = simplemde.codemirror.getCursor();
+                simplemde.codemirror.setSelection(pos, pos);
+                simplemde.codemirror.replaceSelection(res.unicode);
+            }
+        });
+        window.emojiPicker.discover();
+
+        $('.emoji-menu').css('left', $("[title='Emoji']").offset().left - 20);
+    });
+
+</script>
+</body>
+</html>
